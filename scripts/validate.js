@@ -44,7 +44,7 @@ function toggleButtonState(inputList, buttonElement) {
   }
 }
 
-function setEventListeners(form) {
+export function setEventListeners(form) {
   const inputList = form.querySelectorAll(".popup__input");
   const buttonElement = form.querySelector('button[type="submit"]');
   toggleButtonState(inputList, buttonElement);
@@ -53,13 +53,6 @@ function setEventListeners(form) {
       checkInputValidity(input);
       toggleButtonState(inputList, buttonElement);
     });
-  });
-}
-
-export function enableValidation() {
-  const formValidation = document.querySelectorAll(".popup__form");
-  formValidation.forEach((element) => {
-    setEventListeners(element);
   });
 }
 

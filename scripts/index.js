@@ -1,5 +1,4 @@
-import { enableValidation, resetValidation } from "./validate.js";
-enableValidation();
+import { setEventListeners, resetValidation } from "./validate.js";
 
 const initialCards = [
   {
@@ -155,6 +154,8 @@ const addName = document.querySelector(".popup__input_type_card-name");
 const addUrl = document.querySelector(".popup__input_type_url");
 const createBtn = document.querySelector(".popup__button");
 const newCardForm = document.querySelector("#new-card-form");
+setEventListeners(editForm);
+setEventListeners(newCardForm);
 
 const handleCardFormSubmit = function (evt) {
   evt.preventDefault();
