@@ -1,46 +1,63 @@
-# Around The U.S. - Alrededor de los EE.UU.
+# Around The U.S. - Alrededor de los EE. UU.
 
-## 📋 Descripción
+## Descripción
+**Around The U.S.** es una aplicación web interactiva para explorar y compartir fotografías de lugares.  
+Permite editar el perfil, crear nuevas tarjetas, dar "me gusta", eliminar tarjetas y ver imágenes en tamaño ampliado.
 
-**Around The U.S.** es una aplicación web interactiva que permite a los usuarios explorar y compartir fotografías de lugares hermosos alrededor de Estados Unidos. Los usuarios pueden editar su perfil, agregar nuevas tarjetas con fotos de sus lugares favoritos, marcar fotos como favoritas (like) y eliminar tarjetas de su colección personal.
+## Funcionalidades
+- Edición de perfil (nombre y descripción).
+- Renderizado de tarjetas iniciales desde JavaScript.
+- Creación de nuevas tarjetas desde el formulario "Nuevo lugar".
+- Eliminación de tarjetas.
+- Sistema de likes por tarjeta.
+- Vista previa de imagen en popup.
+- Cierre de popups con botón, clic en overlay y tecla `Escape`.
+- Validación de formularios con mensajes personalizados en español.
+- Botón de envío deshabilitado mientras existan campos inválidos.
+- Restablecimiento de validación al cerrar popups de formulario.
 
-## ✨ Funcionalidades
+## Mejoras Implementadas
+- Se añadieron `span` de error para todos los inputs de ambos formularios:
+  - `#name-input-error`
+  - `#description-input-error`
+  - `#place-name-input-error`
+  - `#link-input-error`
+- Se agregaron `id` únicos a cada input para mapear mensajes de error correctamente.
+- Se normalizaron clases de estado de validación:
+  - `.popup__input_invalid`
+  - `.popup__input-error_visible`
+- Se implementó validación modular en `scripts/validate.js`:
+  - `showInputError`
+  - `hideInputError`
+  - `checkInputValidity`
+  - `hasInvalidInput`
+  - `toggleButtonState`
+  - `setEventListeners`
+  - `enableValidation`
+  - `resetValidation`
+- Se exportó `enableValidation` e integración por módulo en `scripts/index.js`.
+- Se importó y ejecutó `resetValidation` al cerrar cualquier popup con formulario.
 
-- **Editar Perfil**: Permite actualizar el nombre y descripción del usuario
-- **Visualizar Tarjetas**: Galería de fotos de lugares populares en Estados Unidos
-- **Agregar Tarjetas**: Los usuarios pueden añadir nuevas fotos con título y enlace
-- **Eliminar Tarjetas**: Opción para remover tarjetas de la colección
-- **Sistema de Likes**: Marcar fotos como favoritas con el botón de "Me gusta"
-- **Interfaz Responsiva**: Diseño adaptable a diferentes tamaños de pantalla
-- **Modal de Imagen**: Vista ampliada de las fotos al hacer clic en ellas
+## Tecnologías Utilizadas
+- HTML5
+- CSS3 (BEM)
+- JavaScript (ES Modules)
+- Diseño responsivo
 
-## 🛠️ Tecnologías Utilizadas
-
-- **HTML5**: Estructura semántica del sitio
-- **CSS3**: Estilos, diseño responsivo con Flexbox y Grid
-- *JavaScript*: Lógica interactiva y manipulación del DOM
-- **Diseño Responsivo**: Mobile-first approach
-- **Fuentes Personalizadas**: Integración de tipografías mediante @font-face
-
-## 🌐 Acceso al Proyecto
-
-Puedes acceder al proyecto en vivo a través de vercel:
-
- *((https://web-project-around-es-pi.vercel.app/))*
-
-## 📁 Estructura del Proyecto
-
-```
+## Estructura del Proyecto
+```txt
 web_project_around_es/
-├── index.html           # Página principal
+├── index.html
+├── README.md
 ├── scripts/
-│   └── index.js         # Lógica de la aplicación
+│   ├── index.js
+│   └── validate.js
 ├── pages/
-│   └── index.css        # Estilos principales
-├── blocks/              # Componentes CSS (BEM)
-├── images/              # Imágenes del proyecto
-└── vendor/              # Librerías externas (normalize.css, fuentes)
+│   └── index.css
+├── blocks/
+├── images/
+└── vendor/
 ```
 
----
-
+## Proyecto en Vivo
+https://web-project-around-es-pi.vercel.app/

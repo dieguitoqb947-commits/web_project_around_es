@@ -56,7 +56,7 @@ function setEventListeners(form) {
   });
 }
 
-function enableValidation() {
+export function enableValidation() {
   const formValidation = document.querySelectorAll(".popup__form");
   formValidation.forEach((element) => {
     setEventListeners(element);
@@ -73,5 +73,3 @@ export function resetValidation(formElement) {
 
   buttonElement.disabled = true;
 }
-
-export default enableValidation;
