@@ -117,6 +117,32 @@
   margin: 0;
 }
 
+.popup__input-error {
+  display: none;
+  font-size: 12px;
+  color: red;
+}
+
+.popup__input_invalid {
+  border-color: red;
+  border-bottom-width: 2px;
+}
+
+.popup__input-error_visible {
+  display: block;
+}
+
+.popup__button:disabled {
+  color: #cccccc;
+  cursor: not-allowed;
+  background: #fff;
+  border: 1px solid #cccccc;
+}
+
+.popup__input:focus {
+  outline: none;
+}
+
 @media screen and (max-width: 544px) {
   .popup {
     bottom: 112px;

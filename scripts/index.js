@@ -1,3 +1,6 @@
+import enableValidation, { resetValidation } from "./validate.js";
+enableValidation();
+
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -37,7 +40,7 @@ const imagePreview = document.querySelector("#image-popup");
 const imagePreviewClsBtn = imagePreview.querySelector(".popup__close");
 const imagePreviewImg = imagePreview.querySelector(".popup__image");
 const imagePreviewTitle = imagePreview.querySelector(".popup__caption");
-
+const popupElements = document.querySelectorAll(".popup");
 const template = document.querySelector("#template__card");
 
 imagePreviewClsBtn.addEventListener("click", () => {
@@ -94,6 +97,10 @@ const openModal = function (modal) {
 
 const closeModal = function (modal) {
   modal.classList.remove("popup_is-opened");
+  const form = modal.querySelector(".popup__form");
+  if (form) {
+    resetValidation(form);
+  }
 };
 
 editarPerfilbtn.addEventListener("click", () => {
@@ -162,3 +169,29 @@ const handleCardFormSubmit = function (evt) {
 };
 
 newCardForm.addEventListener("submit", handleCardFormSubmit);
+
+function overlayClick(popupElement) {
+  popupElement.forEach((element) => {
+    element.addEventListener("click", (event) => {
+      if (event.target === element) {
+        closeModal(element);
+      }
+    });
+  });
+}
+
+overlayClick(popupElements);
+
+function escapeKey() {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      const openedPopup = document.querySelector(".popup_is-opened");
+
+      if (openedPopup) {
+        closeModal(openedPopup);
+      }
+    }
+  });
+}
+
+escapeKey();
