@@ -132,7 +132,7 @@
   display: block;
 }
 
-.popup__button:disabled {
+.popup__button_disabled {
   color: #cccccc;
   cursor: not-allowed;
   background: #fff;

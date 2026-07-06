@@ -1,3 +1,5 @@
+const inactiveButtonClass = "popup__button_disabled";
+
 function showInputError(inputElement, errorMessage) {
   const formElement = inputElement.closest("form");
   const errorElement = formElement.querySelector(
@@ -39,8 +41,10 @@ function hasInvalidInput(inputList) {
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
+    buttonElement.classList.add(inactiveButtonClass);
   } else {
     buttonElement.disabled = false;
+    buttonElement.classList.remove(inactiveButtonClass);
   }
 }
 
@@ -65,4 +69,5 @@ export function resetValidation(formElement) {
   });
 
   buttonElement.disabled = true;
+  buttonElement.classList.add(inactiveButtonClass);
 }
