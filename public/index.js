@@ -5,9 +5,7 @@ import { PopupWithImage } from "./components/PopupWithImage.js";
 import { PopupWithForm } from "./components/PopupWithForm.js";
 import { UserInfo } from "./components/UserInfo.js";
 import { defaultFormConfig } from "./utils/constants.js";
-import type { CardData } from "./components/Card.js";
-
-const initialCards: CardData[] = [
+const initialCards = [
     {
         name: "Valle de Yosemite",
         link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
@@ -33,82 +31,59 @@ const initialCards: CardData[] = [
         link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
     },
 ];
-
-const editProfileForm = document.querySelector("#edit-profile-form") as HTMLFormElement;
+const editProfileForm = document.querySelector("#edit-profile-form");
 const editProfileFormValidator = new FormValidator(defaultFormConfig, editProfileForm);
-const newCardForm = document.querySelector("#new-card-form") as HTMLFormElement;
+const newCardForm = document.querySelector("#new-card-form");
 const newCardFormValidator = new FormValidator(defaultFormConfig, newCardForm);
 const userInfo = new UserInfo({
     name: ".profile__title",
     job: ".profile__description",
 });
-
 editProfileFormValidator.enableValidation();
 newCardFormValidator.enableValidation();
-
 const imagePopup = new PopupWithImage("#image-popup");
 imagePopup.setEventListeners();
-
-const handleCardClick = (name: string, link: string): void => {
+const handleCardClick = (name, link) => {
     imagePopup.open(name, link);
 };
-
-const cardsList = document.querySelector(".cards__list") as HTMLElement;
-const cardSection = new Section<CardData>(
-    {
-        items: initialCards,
-        renderer: (cardData) => {
-            const card = new Card(cardData, "#template__card", handleCardClick);
-            cardSection.addItem(card.createCard());
-        },
+const cardsList = document.querySelector(".cards__list");
+const cardSection = new Section({
+    items: initialCards,
+    renderer: (cardData) => {
+        const card = new Card(cardData, "#template__card", handleCardClick);
+        cardSection.addItem(card.createCard());
     },
-    ".cards__list",
-);
-
+}, ".cards__list");
 cardSection.renderItems();
-
 const editProfilePopup = new PopupWithForm("#edit-popup", (data) => {
     userInfo.setUserInfo({
         name: data.name ?? "",
         job: data.description ?? "",
     });
 });
-
 editProfilePopup.setEventListeners();
-
-const editProfileButton = document.querySelector(".profile__edit-button") as HTMLButtonElement;
-
+const editProfileButton = document.querySelector(".profile__edit-button");
 editProfileButton.addEventListener("click", () => {
     const userData = userInfo.getUserInfo();
-    const editProfileFormElement = document.querySelector("#edit-profile-form") as HTMLFormElement;
-    const nameInput = editProfileFormElement.querySelector("#name") as HTMLInputElement;
-    const descriptionInput = editProfileFormElement.querySelector("#description") as HTMLInputElement;
-
+    const editProfileFormElement = document.querySelector("#edit-profile-form");
+    const nameInput = editProfileFormElement.querySelector("#name");
+    const descriptionInput = editProfileFormElement.querySelector("#description");
     nameInput.value = userData.name;
     descriptionInput.value = userData.job;
-
     editProfilePopup.open();
     editProfileFormValidator.resetValidation();
 });
-
 const newCardPopup = new PopupWithForm("#new-card-popup", (data) => {
-    const card = new Card(
-        {
-            name: data["place-name"] ?? "",
-            link: data.link ?? "",
-        },
-        "#template__card",
-        handleCardClick,
-    );
-
+    const card = new Card({
+        name: data["place-name"] ?? "",
+        link: data.link ?? "",
+    }, "#template__card", handleCardClick);
     cardsList.prepend(card.createCard());
 });
-
 newCardPopup.setEventListeners();
-
-const addCardButton = document.querySelector(".profile__add-button") as HTMLButtonElement;
-
+const addCardButton = document.querySelector(".profile__add-button");
 addCardButton.addEventListener("click", () => {
     newCardFormValidator.resetValidation();
     newCardPopup.open();
 });
+//# sourceMappingURL=index.js.map

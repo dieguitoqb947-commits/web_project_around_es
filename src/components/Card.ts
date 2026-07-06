@@ -6,6 +6,8 @@ export interface CardData {
 export class Card {
     private cardImage!: HTMLImageElement
     private cardElement!: HTMLElement
+    private cardLikeButton!: HTMLButtonElement
+    private cardDeleteButton!: HTMLButtonElement
     private objectCard: CardData
     private templateSelector: string
     private handleCardClick: (name: string, link: string) => void
@@ -28,6 +30,8 @@ export class Card {
     private fillCard(): void {
         const cardTitle = this.cardElement.querySelector(".card__title") as HTMLElement
         this.cardImage = this.cardElement.querySelector(".card__image") as HTMLImageElement
+        this.cardLikeButton = this.cardElement.querySelector(".card__like-button") as HTMLButtonElement
+        this.cardDeleteButton = this.cardElement.querySelector(".card__delete-button") as HTMLButtonElement
 
         cardTitle.textContent = this.objectCard.name
         this.cardImage.src = this.objectCard.link
@@ -45,6 +49,14 @@ export class Card {
     private setEventListeners(): void {
         this.cardImage.addEventListener("click", () => {
             this.handleCardClick(this.objectCard.name, this.objectCard.link)
+        })
+
+        this.cardLikeButton.addEventListener("click", () => {
+            this.cardLikeButton.classList.toggle("card__like-button_is-active")
+        })
+
+        this.cardDeleteButton.addEventListener("click", () => {
+            this.cardElement.remove()
         })
     }
 
