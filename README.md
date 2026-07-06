@@ -1,63 +1,64 @@
 # Around The U.S. - Alrededor de los EE. UU.
 
 ## Descripción
-**Around The U.S.** es una aplicación web interactiva para explorar y compartir fotografías de lugares.  
-Permite editar el perfil, crear nuevas tarjetas, dar "me gusta", eliminar tarjetas y ver imágenes en tamaño ampliado.
+**Around The U.S.** es una aplicación web interactiva para explorar y compartir fotografías de lugares.
+
+Permite editar el perfil del usuario, agregar nuevas tarjetas, eliminar tarjetas, marcar tarjetas como favoritas y ver imágenes en tamaño ampliado.
 
 ## Funcionalidades
-- Edición de perfil (nombre y descripción).
-- Renderizado de tarjetas iniciales desde JavaScript.
+- Edición de perfil con nombre y descripción.
+- Renderizado inicial de 6 tarjetas.
 - Creación de nuevas tarjetas desde el formulario "Nuevo lugar".
 - Eliminación de tarjetas.
-- Sistema de likes por tarjeta.
+- Sistema de "me gusta" por tarjeta.
 - Vista previa de imagen en popup.
-- Cierre de popups con botón, clic en overlay y tecla `Escape`.
-- Validación de formularios con mensajes personalizados en español.
-- Botón de envío deshabilitado mientras existan campos inválidos.
-- Restablecimiento de validación al cerrar popups de formulario.
+- Cierre de popups con botón, clic fuera del contenido y tecla `Escape`.
+- Validación de formularios con mensajes personalizados.
+- Deshabilitación del botón de envío mientras haya campos inválidos.
 
-## Mejoras Implementadas
-- Se añadieron `span` de error para todos los inputs de ambos formularios:
-  - `#name-input-error`
-  - `#description-input-error`
-  - `#place-name-input-error`
-  - `#link-input-error`
-- Se agregaron `id` únicos a cada input para mapear mensajes de error correctamente.
-- Se normalizaron clases de estado de validación:
-  - `.popup__input_invalid`
-  - `.popup__input-error_visible`
-- Se implementó validación modular en `scripts/validate.js`:
-  - `showInputError`
-  - `hideInputError`
-  - `checkInputValidity`
-  - `hasInvalidInput`
-  - `toggleButtonState`
-  - `setEventListeners`
-  - `enableValidation`
-  - `resetValidation`
-- Se exportó `enableValidation` e integración por módulo en `scripts/index.js`.
-- Se importó y ejecutó `resetValidation` al cerrar cualquier popup con formulario.
-
-## Tecnologías Utilizadas
+## Tecnologías utilizadas
 - HTML5
-- CSS3 (BEM)
-- JavaScript (ES Modules)
+- CSS3
+- TypeScript
+- JavaScript modular
+- BEM
 - Diseño responsivo
 
-## Estructura del Proyecto
+## Arquitectura
+El proyecto está organizado con clases reutilizables en `src/components/`:
+
+- `Card`
+- `FormValidator`
+- `Popup`
+- `PopupWithForm`
+- `PopupWithImage`
+- `Section`
+- `UserInfo`
+
+El punto de entrada principal está en `src/index.ts`.
+
+## Estructura del proyecto
 ```txt
 web_project_around_es/
-├── index.html
-├── README.md
-├── scripts/
+├── public/
+│   ├── index.html
 │   ├── index.js
-│   └── validate.js
-├── pages/
-│   └── index.css
-├── blocks/
-├── images/
-└── vendor/
+│   ├── pages/
+│   ├── blocks/
+│   ├── images/
+│   └── vendor/
+├── src/
+│   ├── components/
+│   ├── utils/
+│   └── index.ts
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
-## Proyecto en Vivo
+## Desarrollo
+El proyecto compila TypeScript a JavaScript en la carpeta `public/`.
+El archivo `public/index.html` carga `public/index.js` como módulo.
+
+## Proyecto en vivo
 https://web-project-around-es-pi.vercel.app/
