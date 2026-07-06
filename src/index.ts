@@ -39,8 +39,8 @@ const editProfileFormValidator = new FormValidator(defaultFormConfig, editProfil
 const newCardForm = document.querySelector("#new-card-form") as HTMLFormElement;
 const newCardFormValidator = new FormValidator(defaultFormConfig, newCardForm);
 const userInfo = new UserInfo({
-    name: ".profile__title",
-    job: ".profile__description",
+    nameSelector: ".profile__title",
+    jobSelector: ".profile__description",
 });
 
 editProfileFormValidator.enableValidation();

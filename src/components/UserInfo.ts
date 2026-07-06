@@ -1,29 +1,33 @@
+export interface UserSelectors {
+    nameSelector: string,
+    jobSelector: string
+}
+
 export interface UserData {
     name: string,
     job: string
 }
 
 
-
 export class UserInfo {
-    name: HTMLElement
-    job: HTMLElement
+    private nameElement: HTMLElement
+    private jobElement: HTMLElement
     
-    constructor({name, job}: UserData) {
-        this.name = document.querySelector(name) as HTMLElement
-        this.job = document.querySelector(job) as HTMLElement
+    constructor({nameSelector, jobSelector}: UserSelectors) {
+        this.nameElement = document.querySelector(nameSelector) as HTMLElement
+        this.jobElement = document.querySelector(jobSelector) as HTMLElement
     }
 
     public getUserInfo(): UserData {
         return {
-            name: this.name.textContent??"",
-            job:  this.job.textContent??""
+            name: this.nameElement.textContent??"",
+            job:  this.jobElement.textContent??""
         }
         
     }
 
     public setUserInfo(userInfo: UserData): void {
-        this.name.textContent = userInfo.name
-        this.job.textContent = userInfo.job
+        this.nameElement.textContent = userInfo.name
+        this.jobElement.textContent = userInfo.job
     }
 }

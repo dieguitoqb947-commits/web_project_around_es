@@ -38,6 +38,10 @@ export class PopupWithForm extends Popup {
         })
         
     }
+    public close(): void {
+        this.form.reset()
+        super.close()
+    }
 
 
 

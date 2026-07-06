@@ -25,5 +25,9 @@ export class PopupWithForm extends Popup {
             this.close();
         });
     }
+    close() {
+        this.form.reset();
+        super.close();
+    }
 }
 //# sourceMappingURL=PopupWithForm.js.map
