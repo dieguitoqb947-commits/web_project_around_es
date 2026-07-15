@@ -6,6 +6,7 @@ import { PopupWithForm } from "./components/PopupWithForm.js";
 import { UserInfo } from "./components/UserInfo.js";
 import { defaultFormConfig } from "./utils/constants.js";
 import type { CardData } from "./components/Card.js";
+import { Api } from "./components/Api.js";
 
 const initialCards: CardData[] = [
     {
@@ -112,3 +113,13 @@ addCardButton.addEventListener("click", () => {
     newCardFormValidator.resetValidation();
     newCardPopup.open();
 });
+
+
+const api =  new Api({
+    baseUrl: "https://around-api.es.tripleten-services.com/v1",
+    headers: {
+        authorization: "faf3a66c-8e86-4ee5-b7eb-8532a2e5205d",
+        "Content-Type": "application/json"
+    }
+
+})
