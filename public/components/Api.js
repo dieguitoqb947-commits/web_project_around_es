@@ -9,9 +9,7 @@ export class Api {
         if (res.ok) {
             return res.json();
         }
-        else {
-            return Promise.reject(`Error: ${res.status}`);
-        }
+        throw new Error(`Error: ${res.status}`);
     }
     async getUserInfo() {
         const res = await fetch(`${this.baseUrl}/users/me`, { headers: this.headers });

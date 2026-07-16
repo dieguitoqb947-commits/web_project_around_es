@@ -37,20 +37,28 @@ const handleCardClick = (name, link) => {
 const createCard = (cardData) => {
     const card = new Card(cardData, "#template__card", handleCardClick, (cardId, cardElement) => {
         deleteCardPopup.setSubmitAction(() => {
-            api.deleteCard(cardId)
-                .then(() => {
-                cardElement.remove();
-                deleteCardPopup.close();
-            })
-                .catch((err) => console.log("Error al eliminar la tarjeta:", err));
+            void (async () => {
+                try {
+                    await api.deleteCard(cardId);
+                    cardElement.remove();
+                    deleteCardPopup.close();
+                }
+                catch (err) {
+                    console.log("Error al eliminar la tarjeta:", err);
+                }
+            })();
         });
         deleteCardPopup.open();
     }, (cardId, isLiked) => {
-        api.changeLikeCardStatus(cardId, isLiked)
-            .then((updatedCard) => {
-            card.updateLikeStatus(updatedCard.isLiked);
-        })
-            .catch((err) => console.log("Error al actualizar Like:", err));
+        void (async () => {
+            try {
+                const updatedCard = await api.changeLikeCardStatus(cardId, isLiked);
+                card.updateLikeStatus(updatedCard.isLiked);
+            }
+            catch (err) {
+                console.log("Error al actualizar Like:", err);
+            }
+        })();
     }, currentUserId);
     return card.createCard();
 };
@@ -81,25 +89,27 @@ const init = async () => {
 };
 init();
 const editProfilePopup = new PopupWithForm("#edit-popup", (data) => {
-    editProfilePopup.renderLoading(true);
-    api.editUserInfo({
-        name: data.name ?? "",
-        about: data.description ?? "",
-    })
-        .then((updateUserData) => {
-        userInfo.setUserInfo({
-            name: updateUserData.name,
-            job: updateUserData.about,
-            avatar: updateUserData.avatar
-        });
-        editProfilePopup.close();
-    })
-        .catch((err) => {
-        console.error("Error al actualizar el perfil:", err);
-    })
-        .finally(() => {
-        editProfilePopup.renderLoading(false);
-    });
+    void (async () => {
+        try {
+            editProfilePopup.renderLoading(true);
+            const updateUserData = await api.editUserInfo({
+                name: data.name ?? "",
+                about: data.description ?? "",
+            });
+            userInfo.setUserInfo({
+                name: updateUserData.name,
+                job: updateUserData.about,
+                avatar: updateUserData.avatar
+            });
+            editProfilePopup.close();
+        }
+        catch (err) {
+            console.error("Error al actualizar el perfil:", err);
+        }
+        finally {
+            editProfilePopup.renderLoading(false);
+        }
+    })();
 });
 editProfilePopup.setEventListeners();
 const editProfileButton = document.querySelector(".profile__edit-button");
@@ -114,26 +124,24 @@ editProfileButton.addEventListener("click", () => {
     editProfileFormValidator.resetValidation();
 });
 const newCardPopup = new PopupWithForm("#new-card-popup", (data) => {
-    newCardPopup.renderLoading(true);
-    api.addCard({
-        name: data["place-name"] ?? "",
-        link: data.link ?? ""
-    })
-        .then((newCardData) => {
-        console.log("respuesta de addCard:", newCardData);
-        console.log("owner nuevo:", newCardData.owner);
-        console.log("owner._id nuevo:", newCardData.owner);
-        console.log("currentUserId:", currentUserId);
-        const cardElement = createCard(newCardData);
-        cardSection.addItem(cardElement);
-        newCardPopup.close();
-    })
-        .catch((err) => {
-        console.error("Error al crear la nueva tarjeta:", err);
-    })
-        .finally(() => {
-        newCardPopup.renderLoading(false);
-    });
+    void (async () => {
+        try {
+            newCardPopup.renderLoading(true);
+            const newCardData = await api.addCard({
+                name: data["place-name"] ?? "",
+                link: data.link ?? ""
+            });
+            const cardElement = createCard(newCardData);
+            cardSection.addItem(cardElement);
+            newCardPopup.close();
+        }
+        catch (err) {
+            console.error("Error al crear la nueva tarjeta:", err);
+        }
+        finally {
+            newCardPopup.renderLoading(false);
+        }
+    })();
 });
 newCardPopup.setEventListeners();
 const addCardButton = document.querySelector(".profile__add-button");
@@ -144,28 +152,31 @@ addCardButton.addEventListener("click", () => {
 const deleteCardPopup = new PopupWithConfirmation("#delete-popup");
 deleteCardPopup.setEventListeners();
 const editAvatarPopup = new PopupWithForm("#avatar-popup", (data) => {
-    editAvatarPopup.renderLoading(true);
-    api.updateAvatar({
-        avatar: data.avatar ?? ""
-    })
-        .then((updatedUserData) => {
-        userInfo.setUserInfo({
-            name: updatedUserData.name,
-            job: updatedUserData.about,
-            avatar: updatedUserData.avatar
-        });
-        editAvatarPopup.close();
-    })
-        .catch((err) => {
-        console.error("Error al actualizar el avatar:", err);
-    })
-        .finally(() => {
-        editAvatarPopup.renderLoading(false);
-    });
+    void (async () => {
+        try {
+            editAvatarPopup.renderLoading(true);
+            const updatedUserData = await api.updateAvatar({
+                avatar: data.avatar ?? ""
+            });
+            userInfo.setUserInfo({
+                name: updatedUserData.name,
+                job: updatedUserData.about,
+                avatar: updatedUserData.avatar
+            });
+            editAvatarPopup.close();
+        }
+        catch (err) {
+            console.error("Error al actualizar el avatar:", err);
+        }
+        finally {
+            editAvatarPopup.renderLoading(false);
+        }
+    })();
 });
 editAvatarPopup.setEventListeners();
 const avatarEditButton = document.querySelector(".profile__avatar-button");
 avatarEditButton.addEventListener("click", () => {
+    avatarFormValidator.resetValidation();
     editAvatarPopup.open();
 });
 //# sourceMappingURL=index.js.map

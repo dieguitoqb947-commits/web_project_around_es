@@ -37,9 +37,8 @@ export class Api {
     private checkResponse<T>(res: Response): Promise<T> {
         if(res.ok){
             return  res.json() as Promise<T>
-        } else {
-            return Promise.reject(`Error: ${res.status}`)
         }
+        throw new Error(`Error: ${res.status}`)
     
     }
 
