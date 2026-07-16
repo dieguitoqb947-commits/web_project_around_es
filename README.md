@@ -1,43 +1,56 @@
-# Around The U.S. - Alrededor de los EE. UU.
+# Around The U.S.
 
-## Descripción
-**Around The U.S.** es una aplicación web interactiva para explorar y compartir fotografías de lugares.
-
-Permite editar el perfil del usuario, agregar nuevas tarjetas, eliminar tarjetas, marcar tarjetas como favoritas y ver imágenes en tamaño ampliado.
+Aplicación web interactiva para explorar y compartir fotografías de lugares. Permite editar el perfil, cambiar el avatar, agregar tarjetas, dar y quitar me gusta, eliminar tarjetas y ver imágenes en tamaño ampliado.
 
 ## Funcionalidades
-- Edición de perfil con nombre y descripción.
-- Renderizado inicial de 6 tarjetas.
-- Creación de nuevas tarjetas desde el formulario "Nuevo lugar".
-- Eliminación de tarjetas.
-- Sistema de "me gusta" por tarjeta.
-- Vista previa de imagen en popup.
-- Cierre de popups con botón, clic fuera del contenido y tecla `Escape`.
-- Validación de formularios con mensajes personalizados.
-- Deshabilitación del botón de envío mientras haya campos inválidos.
 
-## Tecnologías utilizadas
+- Edición de perfil con nombre y descripción.
+- Cambio de avatar.
+- Creación de nuevas tarjetas.
+- Eliminación de tarjetas propias con confirmación.
+- Sistema de me gusta por tarjeta.
+- Vista previa de imágenes en popup.
+- Cierre de popups con botón, clic fuera del contenido y tecla `Esc`.
+- Validación de formularios con una clase reutilizable.
+
+## Tecnologías
+
 - HTML5
 - CSS3
 - TypeScript
 - JavaScript modular
 - BEM
-- Diseño responsivo
 
 ## Arquitectura
-El proyecto está organizado con clases reutilizables en `src/components/`:
 
-- `Card`
-- `FormValidator`
-- `Popup`
-- `PopupWithForm`
-- `PopupWithImage`
-- `Section`
-- `UserInfo`
+El proyecto está organizado con clases en `src/components/`:
+
+- `Api` para centralizar las solicitudes al servidor.
+- `Card` para renderizar y gestionar cada tarjeta.
+- `FormValidator` para validar formularios.
+- `Popup` como clase base de popups.
+- `PopupWithForm` para popups con formulario.
+- `PopupWithImage` para la vista ampliada de imágenes.
+- `PopupWithConfirmation` para confirmar eliminación de tarjetas.
+- `Section` para renderizar listas de elementos.
+- `UserInfo` para manejar la información del perfil.
 
 El punto de entrada principal está en `src/index.ts`.
 
+## Integración con API
+
+La aplicación consume la API de Around para:
+
+- obtener los datos del usuario;
+- cargar las tarjetas iniciales;
+- actualizar información del perfil;
+- actualizar el avatar;
+- crear tarjetas nuevas;
+- eliminar tarjetas;
+- alternar el estado de me gusta.
+
 ## Estructura del proyecto
+
 ```txt
 web_project_around_es/
 ├── public/
@@ -57,8 +70,9 @@ web_project_around_es/
 ```
 
 ## Desarrollo
-El proyecto compila TypeScript a JavaScript en la carpeta `public/`.
+
 El archivo `public/index.html` carga `public/index.js` como módulo.
 
 ## Proyecto en vivo
+
 https://web-project-around-es-pi.vercel.app/
