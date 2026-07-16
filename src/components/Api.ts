@@ -91,30 +91,28 @@ export class Api {
         return this.checkResponse<void>(res)
     }
 
-    async changeLikeCardStatus(cardId: string, isLiked: boolean): Promise<CardDataApi>{
-
-        if(isLiked){
-            const res: Response =  await fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
-            method: "PUT",
-            headers: this.headers
-            })
-            return this.checkResponse<CardDataApi>(res)
-        }else {
-            const res: Response =  await fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
-            method: "DELETE",
-            headers: this.headers
-            })
-            return this.checkResponse<CardDataApi>(res)
+    async changeLikeCardStatus(cardId: string, isLiked: boolean): Promise<CardDataApi> {
+    if (isLiked) {
+    const res: Response = await fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+        method: "DELETE",
+        headers: this.headers
+    });
+    return this.checkResponse<CardDataApi>(res);
+    } else {
+    const res: Response = await fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+        method: "PUT",
+        headers: this.headers
+    });
+    return this.checkResponse<CardDataApi>(res);
         }
-
     }
 
-    async updateAvatar(avatar: string): Promise<UserData> {
+    async updateAvatar(data: { avatar: string }): Promise<UserData> {
         const res: Response = await fetch(`${this.baseUrl}/users/me/avatar`, {
             method: "PATCH",
             headers: this.headers,
             body: JSON.stringify({
-                avatar
+                avatar: data.avatar
             })
         })
         return this.checkResponse<UserData>(res)

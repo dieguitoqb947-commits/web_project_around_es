@@ -11,8 +11,8 @@ export class Section<T> {
         this.renderedItems =  items
     }
 
-    renderItems(): void {
-        this.renderedItems.forEach((item) => {
+    renderItems(items: T[]): void {
+        items.forEach((item) => {
             this.renderer(item)
         })
     }

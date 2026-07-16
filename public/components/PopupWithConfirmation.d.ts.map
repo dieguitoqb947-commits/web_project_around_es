@@ -1,0 +1,1 @@
+{"version":3,"file":"PopupWithConfirmation.d.ts","sourceRoot":"","sources":["../../src/components/PopupWithConfirmation.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,YAAY,CAAC;AAEnC,qBAAa,qBAAsB,SAAQ,KAAK;IAC5C,OAAO,CAAC,aAAa,CAAoB;IACzC,OAAO,CAAC,kBAAkB,CAAa;gBAE3B,aAAa,EAAE,MAAM;IAK1B,eAAe,CAAC,MAAM,EAAE,MAAM,IAAI;IAIzB,iBAAiB,IAAI,IAAI;CAM5C"}

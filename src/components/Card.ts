@@ -76,25 +76,22 @@ export class Card {
     }
 
     private setEventListeners(): void {
+    this.cardImage.addEventListener("click", () => {
+        this.handleCardClick(this.objectCard.name, this.objectCard.link)
+    })
 
-        this.cardImage.addEventListener("click", () => {
-            this.handleCardClick(this.objectCard.name, this.objectCard.link)
-        })
+    this.cardLikeButton.addEventListener("click", () => {
+        this.handleLikeClick(this.objectCard._id, this.objectCard.isLiked)
+    })
 
-        this.cardLikeButton.addEventListener("click", () => {
-            this.handleLikeClick(this.objectCard._id, this.objectCard.isLiked)})
+    if (this.objectCard.owner._id !== this.currentUserId) {
+        this.cardDeleteButton.remove()
+        return
+    }
 
-        if(this.objectCard.owner._id === this.currentUserId){
-            this.cardDeleteButton.addEventListener("click", () => {
-            this.handleDeleteClick(this.objectCard._id, this.cardElement)
-        })
-        } else {
-            this.cardDeleteButton.remove()
-        }
-
-        
-
-        
+    this.cardDeleteButton.addEventListener("click", () => {
+        this.handleDeleteClick(this.objectCard._id, this.cardElement)
+    })
 }
 
 
