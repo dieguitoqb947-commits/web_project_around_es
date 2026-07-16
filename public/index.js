@@ -120,6 +120,10 @@ const newCardPopup = new PopupWithForm("#new-card-popup", (data) => {
         link: data.link ?? ""
     })
         .then((newCardData) => {
+        console.log("respuesta de addCard:", newCardData);
+        console.log("owner nuevo:", newCardData.owner);
+        console.log("owner._id nuevo:", newCardData.owner);
+        console.log("currentUserId:", currentUserId);
         const cardElement = createCard(newCardData);
         cardSection.addItem(cardElement);
         newCardPopup.close();

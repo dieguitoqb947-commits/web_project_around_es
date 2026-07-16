@@ -9,10 +9,7 @@ export interface CardDataApi {
     _id: string
     name: string
     link: string 
-    owner: {
-        _id: string,
-        name: string
-    }
+    owner: string
     createdAt: string
 }
 
@@ -84,7 +81,7 @@ export class Card {
         this.handleLikeClick(this.objectCard._id, this.objectCard.isLiked)
     })
 
-    if (this.objectCard.owner._id !== this.currentUserId) {
+    if (this.objectCard.owner !== this.currentUserId) {
         this.cardDeleteButton.remove()
         return
     }

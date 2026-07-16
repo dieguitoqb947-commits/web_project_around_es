@@ -50,6 +50,7 @@ const handleCardClick = (name: string, link: string): void => {
 
 
 const createCard = (cardData: CardDataApi): HTMLElement => {
+
     const card = new Card(
         cardData,
         "#template__card",
@@ -166,6 +167,11 @@ const newCardPopup = new PopupWithForm("#new-card-popup", (data) => {
     })
 
     .then((newCardData) => {
+        console.log("respuesta de addCard:", newCardData);
+        console.log("owner nuevo:", newCardData.owner);
+        console.log("owner._id nuevo:", newCardData.owner);
+        console.log("currentUserId:", currentUserId);
+
         const cardElement = createCard(newCardData)
         cardSection.addItem(cardElement)
         newCardPopup.close()
@@ -218,7 +224,6 @@ avatarEditButton.addEventListener("click", () => {
     
     
 })
-
 
 
 

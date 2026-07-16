@@ -45,7 +45,7 @@ export class Card {
         this.cardLikeButton.addEventListener("click", () => {
             this.handleLikeClick(this.objectCard._id, this.objectCard.isLiked);
         });
-        if (this.objectCard.owner._id !== this.currentUserId) {
+        if (this.objectCard.owner !== this.currentUserId) {
             this.cardDeleteButton.remove();
             return;
         }
