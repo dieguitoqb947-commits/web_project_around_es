@@ -44,7 +44,7 @@ const createCard = (cardData) => {
                     deleteCardPopup.close();
                 }
                 catch (err) {
-                    console.log("Error al eliminar la tarjeta:", err);
+                    console.error("Error al eliminar la tarjeta:", err);
                 }
             })();
         });
@@ -56,7 +56,7 @@ const createCard = (cardData) => {
                 card.updateLikeStatus(updatedCard.isLiked);
             }
             catch (err) {
-                console.log("Error al actualizar Like:", err);
+                console.error("Error al actualizar Like:", err);
             }
         })();
     }, currentUserId);
@@ -84,7 +84,7 @@ const init = async () => {
         cardSection.renderItems(initialCards);
     }
     catch (err) {
-        console.log("Fallo al cargar los datos iniciales:", err);
+        console.error("Fallo al cargar los datos iniciales:", err);
     }
 };
 init();
