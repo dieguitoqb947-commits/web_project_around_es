@@ -63,7 +63,7 @@ const createCard = (cardData: CardDataApi): HTMLElement => {
                         cardElement.remove()
                         deleteCardPopup.close()
                     } catch (err) {
-                        console.log("Error al eliminar la tarjeta:", err)
+                        console.error("Error al eliminar la tarjeta:", err)
                     }
                 })()
             })
@@ -75,7 +75,7 @@ const createCard = (cardData: CardDataApi): HTMLElement => {
                     const updatedCard = await api.changeLikeCardStatus(cardId, isLiked)
                     card.updateLikeStatus(updatedCard.isLiked)
                 } catch (err) {
-                    console.log("Error al actualizar Like:", err)
+                    console.error("Error al actualizar Like:", err)
                 }
             })()
         },
@@ -117,7 +117,7 @@ const init = async () => {
         cardSection.renderItems(initialCards);
 
     } catch (err: unknown) {
-        console.log("Fallo al cargar los datos iniciales:", err);
+        console.error("Fallo al cargar los datos iniciales:", err);
     }
     
 };
